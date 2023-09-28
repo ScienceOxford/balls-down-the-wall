@@ -29,8 +29,8 @@
 
   <div id="servo" class="left">
     <h3>Making things move</h3>
-    <p>- connect a servo</p>
-    <p>- code a servo - give min and max</p>
+    <p>- connect the linear servo</p>
+    <p>- code a servo - give min and max to try first</p>
     <p>- use button A & B to control</p>
   </div>
 
@@ -38,18 +38,20 @@
     <h3>Engineering</h3>
     <p>- angle is important - you might need to test a few things</p>
     <p>- glue your tubes & servo, then test out your own min and max to let the balls drop</p>
+    <p>- extension = test out the wait time to allow ONE ball to drop but not the second</p>
   </div>
 
   <div id="random" class="left">
     <h3>Making it playable</h3>
-    <p>- what do you want to happen?</p>
-    <p>- click a button to allow a single ball to come through? you need to work on the timing</p>
-    <p>- randomly choose when to let the ball through? work on timings AND wait a random time between each drop</p>
+    <p>- lets add some gamification - you press the button and then it waits a random amount of time before letting the ball drop</p>
+    <p>from random import randint -- sleep(randint(500, 2000))</p>
   </div>
 
   <div id="extensions" class="left">
     <h3>Next steps</h3>
-    <p>- second servo?</p>
+    <p>- second servo</p>
+    <p>- click a button to allow a single ball to come through? you need to work on the timing</p>
+    <p>- add music and display effects (be careful of your algorithm, it might slow things down!)</p>
   </div>
 
   <footer class="links">
