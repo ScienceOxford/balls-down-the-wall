@@ -17,41 +17,107 @@
 
   <div id="intro">
     <p>Resources for the 'Pinball Whizzkids' Creative Computing Club.</p>
+    <p>During this workshop, you will use a BBC micro:bit to control a servo motor, to make your own programmable version of our <a href="https://scienceoxford.com/centre/public/exploration-zone/" target="_blank">Exploration Zone's 'Balls Down the Wall'</a> exhibit.</p>
     <p>This page recaps what <a href="https://bit.ly/Sep23CCC" target="_blank">we discussed as a group</a>.</p>
-    <p>To skip to the advanced extensions, <a href="#extensions">click here</a>.</p>
     <br>
   </div>
 
   <div id="starter" class="left">
-    <h3>Basic code</h3>
-    <p>...</p>
+    <h3>Coding a micro:bit in Python</h3>
+    <p>Open the Python editor by visiting <a href="https://python.microbit.org/" target="_blank">python.microbit.org/</a>. Your screen will look something like this:</p>
+    <img src="https://raw.githubusercontent.com/ScienceOxford/musical-microbits/main/images/python-editor.PNG" alt="screenshot of the Python editor screen" width="800px" height="auto">
+    <br>
+    <ul>
+      <li>In the middle is where you will add your own code.</li>
+      <li>On the left-hand-side is the reference menu - you can see examples of some of the code here, as well as help understanding these examples.</li>
+      <li>On the right-hand-side is the simulator - a pretend micro:bit you can use to test your code.</li>
+      <li>On the bottom is the Send to Micro:bit button, which you will use to send code to your physical micro:bit.</li>
+    </ul>
+    <br>
+    <p>Edit the code on the screen, then flash it to your micro:bit to see the changes.</p>
+    <p>Try:</p>
+    <ul>
+        <li>Editing the <code>Image</code> that is shown (hint: check the reference menu, under Display, for a list of images)</li>
+        <li>Changing the number in the brackets after <code>sleep</code> (hint: this tells the micro:bit how long to keep your image on the display)</li>
+        <li>Making the micro:bit scroll your name instead of <code>'Hello'</code></li>
+    </ul>
+    <br>
+    <p>The micro:bit's A and B buttons are very useful to choosing when to make something happen.</p>
+    <p>Modify the code on your screen so that it only happens when you press button A.</p>
+    <p class="debugging">Python uses <strong>indentation</strong> (whitespace on the left) to know which bits of code to run. Take a look at the below code, and look at which parts are in line with each other.</p>
+    <pre>while True:
+    if button_a.was_pressed():
+        display.show(Image.HEART)
+        sleep(1000)
+        display.scroll('Hello')</pre>
+    <br>
   </div>
 
   <div id="servo" class="left">
     <h3>Making things move</h3>
-    <p>- connect the linear servo</p>
-    <p>- code a servo - give min and max to try first</p>
-    <p>- use button A & B to control</p>
+    <p>A servo motor is a specific type of motor that can be given a precise position. The servos you are using in this workshop have been attached to a linear gear system, so when the servo motor turns, the gear pushes a stick up and down.</p>
+    <img src=".\images\linear-servo.gif" alt="animated image showing a servo motor attached to yellow linear gears" width="600px" height="auto">
+    <br>
+    <p>You are going to use this system to control when a ping pong ball is released into your Balls Down the Wall exhibit.</p>
+    <p>Connect your servo to the micro:bit by connecting:</p>
+    <ul>
+      <li>The un-insulated crocodile clip with white wire to Pin0 on your micro:bit.</li>
+      <li>The other crocodule clip to GND on your micro:bit.</li>
+    </ul>
+    <img src=".\images\connections-microbit.jpg" alt="photograph showing a micro:bit with an uninsulated crocodile clip connected to pin 0 (the furthest left), and an insulated crocodile clip connected to GND (the furthest right)" width="600px" height="auto">
+    <p>For full wiring instructions, <a href="servo-wiring.html" target="_blank">click here</a>.</p>
+    <br>
+    <p>To start, try the code below, which turns the servo to it's maximum and minimum positions using the micro:bit's buttons:</p>
+    <pre>while True:
+    if button_a.was_pressed():
+        pin0.write_analog(40)
+    if button_b.was_pressed():
+        pin0.write_analog(130)</pre>
+    <br>
+    <p><strong>Challenge:</strong> use just one button to move the servo up and down. Use <code>sleep()</code> to control the timing.</p>
+    <br>
   </div>
 
   <div id="glue" class="left">
     <h3>Engineering</h3>
-    <p>- angle is important - you might need to test a few things</p>
-    <p>- glue your tubes & servo, then test out your own min and max to let the balls drop</p>
-    <p>- extension = test out the wait time to allow ONE ball to drop but not the second</p>
+    <p>Now that your servo motor is moving, you can begin to physically create your 'Balls Down the Wall'.</p>
+    <img src=".\images\balls-down-the-wall.gif" alt="animated image showing a linear servo blocking ping pong balls in a tube. When the servo moves down, a ping pong ball drops out." width="600px" height="auto">
+    <p>Use masking tape to attach your servo motor to your backing cardboard, and hold your tube in place (ask your grown-up to help you!) - getting the angle right can be tricky, so practice a few times before using the glue guns to attach it securely.</p>
+    <ul>
+      <li>If the angle is too steep, your ping pong ball might move to fast and bounce over the servo.</li>
+      <li>If the angle is too narrow, the ball might not move at all!</li>
+    </ul>
+    <p><strong>Challenge:</strong> use just one button to move the servo up and down. Use <code>sleep()</code> to control the timing.</p>
+    <br>
   </div>
 
   <div id="random" class="left">
-    <h3>Making it playable</h3>
-    <p>- lets add some gamification - you press the button and then it waits a random amount of time before letting the ball drop</p>
-    <p>from random import randint -- sleep(randint(500, 2000))</p>
+    <h3>Adding some randomness</h3>
+    <p>Make your exhibit more exciting, by letting the micro:bit decide when to release your ping pong ball!</p>
+    <p>Currently, when you press a button on the micro:bit, the servo moves immediately. By adding <code>sleep()</code> beforehand, it will pause first.</p>
+    <pre>while True:
+    if button_a.was_pressed():
+        sleep(1000)
+        pin0.write_analog(40)</pre>
+    <br>
+    <p>Test your new code to make sure it works.</p>
+    <p>We will replace the number inside <code>sleep()</code> with some new code, to pick a random number.</p>
+    <p>Before we can do this, at the very top of your program, add this line:</p>
+    <pre>from random import randint</pre>
+    <br>
+    <p>This is needed so that the micro:bit understands the rest of the instructions.</p>
+    <p>Go to your <code>sleep(1000)</code> line, and replace the <code>1000</code> with <code>randint(500, 2000)</code>.</p>
+    <p>This asks the micro:bit to choose an <strong>random integer</strong> (random whole number), between 500 and 2000, meaning it will wait 0.5-2 seconds before moving the servo.</p>
+    <p>Try it out, then adjust the numbers - edit the code until you are happy with it.</p>
+    <br>
   </div>
 
   <div id="extensions" class="left">
     <h3>Next steps</h3>
-    <p>- second servo</p>
-    <p>- click a button to allow a single ball to come through? you need to work on the timing</p>
-    <p>- add music and display effects (be careful of your algorithm, it might slow things down!)</p>
+    <p><strong>Engineering: </strong>add more paths for your ping pong ball to follow.</p>
+    <p><strong>Programming: </strong> look through the <strong>Sound</strong> reference menu, and add sound effects and display effects to your exhibit.</p>
+    <p><strong>Challenge: </strong> add a second servo motor, perhaps one that tilts your ball left or right. Consider your wiring, programming, and it's placement in your exhibit.</p>
+    <p><strong>Challenge: </strong> perfect your linear servo so that only one ball can drop through at once. Consider it's timing and position in your code, and the ball position and angle on your exhibit.</p>
   </div>
 
   <footer class="links">
